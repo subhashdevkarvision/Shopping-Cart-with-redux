@@ -8,7 +8,7 @@ const produtcData = [
     name: "Margherita Pizza",
     description:
       "Classic pizza with fresh mozzarella, basil, and tomato sauce.",
-    price: 8.99,
+    price: 899,
     image: img1,
     qty: 1,
   },
@@ -17,7 +17,7 @@ const produtcData = [
     name: "Cheeseburger",
     description:
       "Juicy beef patty with cheddar cheese, lettuce, tomato, and pickles in a toasted bun.",
-    price: 6.49,
+    price: 649,
     image: img2,
     qty: 1,
   },
@@ -26,7 +26,7 @@ const produtcData = [
     name: "Caesar Salad",
     description:
       "Crisp romaine lettuce tossed with Caesar dressing, croutons, and parmesan cheese.",
-    price: 5.25,
+    price: 559,
     image: img3,
     qty: 1,
   },
@@ -35,7 +35,7 @@ const produtcData = [
     name: "Chocolate Brownie",
     description:
       "Rich chocolate brownie served with a scoop of vanilla ice cream.",
-    price: 3.75,
+    price: 375,
     image: img4,
     qty: 1,
   },
