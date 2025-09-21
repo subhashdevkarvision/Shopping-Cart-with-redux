@@ -10,6 +10,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Fade,
+  Backdrop,
 } from "@mui/material";
 import React, { useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -32,7 +34,6 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-// import Paper from "@mui/material/Paper";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
@@ -45,9 +46,9 @@ const Cart = () => {
 
   return (
     <div className="">
-      <nav className="flex justify-between bg-black text-white p-5 ">
+      <nav className="flex justify-between items-center bg-black text-white p-5 ">
         <div className="text-2xl">Shopping Cart</div>
-        <IconButton color="warning" onClick={handleOpen}>
+        <IconButton className="!bg-white" onClick={handleOpen}>
           <ShoppingCartIcon fontSize="large"></ShoppingCartIcon>
           <Badge
             className="bottom-3.5"
@@ -56,6 +57,7 @@ const Cart = () => {
           ></Badge>
         </IconButton>
       </nav>
+
       <Modal open={open} onClose={handleClose}>
         <TableContainer component={Paper}>
           <Table>
@@ -119,31 +121,47 @@ const Cart = () => {
       <div className="flex justify-evenly flex-wrap px-5 gap-5 mt-5">
         {produtcData.length > 0 &&
           produtcData.map((item, index) => (
-            // <Paper>
-            <Card key={index} sx={{ maxWidth: 300 }}>
+            <Card
+              key={index}
+              className="rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-[1.03]"
+              sx={{ maxWidth: 300 }}
+            >
               <CardMedia
                 component="img"
                 alt="green iguana"
                 height="140"
                 image={item.image}
+                className="rounded-t-xl"
               />
               <CardContent className="h-1/3">
-                <h2 className="text-xl">{item.name}</h2>
-                <h4 className="">{item.description}</h4>
-                <p variant="body2" className="my-1" sx={{ fontSize: "1.5rem" }}>
-                  {item.price}
+                <h2 className="text-xl font-semibold text-gray-800 mb-1">
+                  {item.name}
+                </h2>
+                <h4 className="text-gray-600 text-sm mb-2">
+                  {item.description}
+                </h4>
+                <p
+                  variant="body2"
+                  className="text-indigo-600 font-bold text-lg"
+                  sx={{ fontSize: "1.5rem" }}
+                >
+                  &#8377;{item.price}
                 </p>
               </CardContent>
-              <CardActions className="mt-2 flex-col">
+              <CardActions className="flex flex-col items-center gap-2 mb-3">
                 <div className="mb-2">
-                  <ButtonGroup>
+                  <ButtonGroup className="shadow-sm">
                     <Button
-                      onClick={() => dispatch(incrementItems({ id: item.id }))}
+                      className="!bg-indigo-100 hover:!bg-indigo-200 !text-indigo-700"
+                      onClick={() => dispatch(addToCart(item))}
                     >
                       <AddCircleIcon />
                     </Button>
-                    <span>{item.qty}</span>
+                    <span className="px-4 font-medium text-gray-700">
+                      {products.find((p) => p.id === item.id)?.qty || 0}
+                    </span>
                     <Button
+                      className="!bg-red-100 hover:!bg-red-200 !text-red-700"
                       onClick={() =>
                         dispatch(decrementFromCart({ id: item.id }))
                       }
@@ -154,7 +172,7 @@ const Cart = () => {
                 </div>
                 <Button
                   variant="contained"
-                  className="w-full"
+                  className="w-full !bg-indigo-600 hover:!bg-indigo-700 text-white font-medium transition-colors"
                   onClick={() => {
                     console.log(item), dispatch(addToCart(item));
                   }}
@@ -164,7 +182,6 @@ const Cart = () => {
                 </Button>
               </CardActions>
             </Card>
-            // </Paper>
           ))}
       </div>
     </div>
