@@ -13,7 +13,7 @@ const productSlice = createSlice({
         (item) => item?.id === action.payload.id
       );
       if (product) {
-        product.qty += 1;
+        return;
       } else {
         state.products.push(action.payload);
       }
@@ -29,6 +29,8 @@ const productSlice = createSlice({
       );
       if (product) {
         product.qty += 1;
+      } else {
+        state.products.push(action.payload);
       }
     },
     decrementFromCart: (state, action) => {
